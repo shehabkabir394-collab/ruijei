@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b5fff">
+<title>Reyee Control — Admin Panel</title>
+<style>
+:root{--bg:#071225;--panel:#101f38;--panel2:#142744;--text:#eef5ff;--muted:#9fb1cc;--blue:#3684ff;--cyan:#55d6ff;--line:#263b5d;--red:#ff647c;--green:#3de0ad}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#133d73 0,transparent 40%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#3684ff,#55d6ff);display:grid;place-items:center;font-size:24px;box-shadow:0 8px 30px #1673ff44}.brand h1{font-size:20px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}.badge{border:1px solid #315079;background:#102b4b;color:#a9d8ff;border-radius:99px;padding:7px 11px;font-size:12px}
+h2{font-size:24px;margin:0 0 6px}.sub{color:var(--muted);margin:0 0 20px;font-size:14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(145deg,#132643,#0e1b31);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 10px 35px #0002}.statlabel{font-size:13px;color:var(--muted)}.stat{font-size:28px;font-weight:750;margin-top:8px}.stat small{font-size:12px;color:var(--muted);font-weight:500}.section{margin-top:18px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.sectionhead h3{margin:0;font-size:17px}.btn{border:0;border-radius:11px;background:var(--blue);color:white;font-weight:650;padding:11px 14px;cursor:pointer}.btn.secondary{background:#1b3151;border:1px solid #365174}.btn.danger{background:#a92d48}.btn:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.notice{border:1px solid #5b4a24;background:#2b2516;color:#ffe2a0;border-radius:13px;padding:13px 15px;font-size:13px;line-height:1.55;margin-bottom:16px}.status{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}.dot{width:8px;height:8px;background:#f6bd4b;border-radius:50%}.field{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #345071;background:#09172b;color:var(--text);outline:none}.field:focus{border-color:var(--cyan)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.label{font-size:12px;color:var(--muted);display:block;margin:0 0 6px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:500px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:600}.empty{text-align:center;padding:28px 10px;color:var(--muted)}.pill{font-size:11px;padding:5px 8px;border-radius:99px;background:#263a56;color:#c5d7ef}.footer{text-align:center;color:#7287a5;font-size:12px;padding:25px 0 10px}.small{font-size:12px;color:var(--muted);line-height:1.6}.hidden{display:none!important}
+@media(max-width:700px){.wrap{padding:15px}.top{align-items:flex-start}.brand h1{font-size:17px}.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.sectionhead{align-items:flex-start;flex-direction:column}.stat{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="logo">⌁</div><div><h1>Reyee Control</h1><p>নিজস্ব Router Admin Dashboard</p></div></div>
+ <span class="badge">PREVIEW • EW1200</span>
+</header>
+<div class="notice"><b>প্রাথমিক ডেমো:</b> এই ওয়েবসাইটের UI তৈরি করা হয়েছে। এটি এখনো তোমার Ruijie Reyee EW1200 রাউটারের সঙ্গে সংযুক্ত নয়—তাই এখানকার Block/Unblock বা Wi‑Fi বাটন বাস্তবে রাউটার পরিবর্তন করবে না। বাস্তব নিয়ন্ত্রণের জন্য রাউটারের অনুমোদিত API/Cloud integration যাচাই করতে হবে। রাউটারের পাসওয়ার্ড এই পেজে লিখবে না।</div>
+<h2>ড্যাশবোর্ড</h2><p class="sub">রাউটারের অবস্থা ও ডিভাইস ম্যানেজমেন্ট এক জায়গায়।</p>
+<div class="grid">
+ <div class="card"><div class="statlabel">রাউটার</div><div class="stat">EW1200</div><div class="status"><span class="dot"></span>সংযোগ এখনো সেটআপ হয়নি</div></div>
+ <div class="card"><div class="statlabel">সংযুক্ত ডিভাইস</div><div class="stat" id="deviceCount">০</div><div class="small">ডেমো তালিকার সংখ্যা</div></div>
+ <div class="card"><div class="statlabel">Wi‑Fi অবস্থা</div><div class="stat" id="wifiStatus">চালু</div><div class="small">শুধু ডেমো UI — রাউটার নিয়ন্ত্রণ নয়</div></div>
+</div>
+<div class="section card">
+ <div class="sectionhead"><div><h3>ডিভাইস ম্যানেজমেন্ট</h3><div class="small">উদাহরণ ডিভাইস যোগ করে UI পরীক্ষা করতে পারো।</div></div><div class="row"><button class="btn secondary" id="addDemo">+ ডেমো ডিভাইস</button><button class="btn danger" id="clearDemo">তালিকা মুছুন</button></div></div>
+ <div class="tablewrap"><table><thead><tr><th>ডিভাইসের নাম</th><th>MAC Address</th><th>অবস্থা</th><th>অ্যাকশন (ডেমো)</th></tr></thead><tbody id="devices"><tr><td colspan="4" class="empty">এখনো কোনো ডেমো ডিভাইস নেই।</td></tr></tbody></table></div>
+</div>
+<div class="section card">
+ <div class="sectionhead"><h3>সাইট সেটিংস</h3><span class="pill">লোকাল ডেমো</span></div>
+ <div class="formgrid">
+  <div><label class="label" for="siteName">প্যানেলের নাম</label><input class="field" id="siteName" value="Reyee Control"></div>
+  <div><label class="label" for="routerModel">রাউটার মডেল</label><input class="field" id="routerModel" value="Ruijie Reyee EW1200" readonly></div>
+ </div>
+ <div class="row" style="margin-top:12px"><button class="btn" id="saveSettings">নাম সংরক্ষণ</button><span id="saved" class="small"></span></div>
+</div>
+<div class="footer">Reyee Control • নিরাপদ প্রোটোটাইপ • রাউটার সংযোগ এখনো কনফিগার করা হয়নি</div>
+</div>
+<script>
+const samples=[
+ {name:"Demo Phone",mac:"A2:14:7B:90:31:10",blocked:false},
+ {name:"Demo Laptop",mac:"D8:51:2F:4C:90:22",blocked:false}
+];
+let devices=[];
+const bn=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+function render(){document.getElementById("deviceCount").textContent=bn(devices.length);const tb=document.getElementById("devices");if(!devices.length){tb.innerHTML='<tr><td colspan="4" class="empty">এখনো কোনো ডেমো ডিভাইস নেই।</td></tr>';return}tb.innerHTML=devices.map((d,i)=>`<tr><td>${d.name}</td><td>${d.mac}</td><td><span class="pill">${d.blocked?"Blocked (ডেমো)":"Connected (ডেমো)"}</span></td><td><button class="btn ${d.blocked?"secondary":"danger"}" data-i="${i}">${d.blocked?"Unblock":"Block"}</button></td></tr>`).join("");tb.querySelectorAll("button").forEach(b=>b.onclick=()=>{devices[+b.dataset.i].blocked=!devices[+b.dataset.i].blocked;render()})}
+document.getElementById("addDemo").onclick=()=>{const d=samples[devices.length%samples.length];devices.push({...d,mac:d.mac.replace(/.$/,String((devices.length+1)%10))});render()};
+document.getElementById("clearDemo").onclick=()=>{devices=[];render()};
+document.getElementById("saveSettings").onclick=()=>{const n=document.getElementById("siteName").value.trim();if(n)document.querySelector(".brand h1").textContent=n;document.getElementById("saved").textContent="সংরক্ষিত (এই ব্রাউজারে শুধু দৃশ্যমান পরিবর্তন)।";setTimeout(()=>document.getElementById("saved").textContent="",2500)};
+</script>
+</body></html>
